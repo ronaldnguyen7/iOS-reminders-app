@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="top-align">
+            <div class="heading-container">
+                <div class="heading">
+                    <h1>Reminders</h1>
+                </div>
+        
+                <div class="date-container">
+                    <h2 id="date"></h2>
+                    <h2 id="time"></h2>
+                </div>       
+            </div>
+        
+            <div class="reminders-container">
+                <div class="notification-container">
+                    <div class="reminder-left">
+                        <div onclick = "setNotificationStatus()" class="reminder-circle" id="circle">
+                            <div id="innerCircle" class="inner-circle"></div>
+                        </div>
+                        
+                        <div class="reminder-text">
+                            <h2 id="reminder-title">XXX</h2>
+                            <h3 id="reminder-time">12/22/05, x:xx</h3xs>
+                        </div>
+                    </div>
+                    
+                    <div class="reminder-right">
+                        <h2 id="reminder-remaining">xxx</h2>
+                    </div>   
+                </div>
+
+                <div id="new-reminder" class="new-reminder-container">
+                    <div class="reminder-left">
+                        <div onclick = "setNotificationStatus()" class="reminder-circle" id="circle">
+                            <div id="innerCircle" class="inner-circle"></div>
+                        </div>
+                        
+                        <div class="reminder-text">
+                            <input id="new-reminder-event" class="event-input">
+                            <div class="new-time-date">
+                                <input id="new-reminder-month" class="input-field">
+                                <h3 id="new-reminder-date">/</h2>
+                                <input id="new-reminder-day" class="input-field">
+                                <h3 id="new-reminder-date">/</h2>
+                                <input id="new-reminder-year" class="input-field">
+
+                                <h3>, </h3>
+
+                                <input id="new-reminder-hour" class="input-field">
+                                <h3 id="new-reminder-time">:</h3>
+                                <input id="new-reminder-minute" class="input-field">
+
+                                <button onclick="switchMeridiem()" class="meridiem-btn">
+                                    <h3 id="meridiem-text">AM</h3>
+                                </button>
+                            </div>  
+                        </div>
+                    </div>
+                    
+   
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-align">
+            <div class="footing-container">
+                <div class="add-button-container">
+                    <button onclick="addReminder()" class="add-btn">
+                        <h2 id="plus-sign">+</h2>
+                    </button>
+                    <div onclick="addReminder()" class="text-hover">
+                        <h2 id="new-reminder-text">New Reminder</h2>
+                    </div>  
+                </div>
+
+                <button onclick="saveChanges()" class="save-btn">
+                    <h2 id="save">Save</h2>
+                </button>
+            </div>
+        </div>
+    </div>
+        
+    
+
+    
+    <script src="index.js"></script>
+</body>
+</html>
