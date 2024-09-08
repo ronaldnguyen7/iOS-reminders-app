@@ -104,6 +104,8 @@ input {
     align-items: center;
     padding: 50px;
     color: orange;
+    position: absolute;
+    width: 100vw;
 }
 
 .add-button-container {
