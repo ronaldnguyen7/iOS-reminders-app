@@ -1,16 +1,21 @@
+var numReminders = 0
+
 setInterval(setDateTime, 1000)
 setDateTime()
 
-createNotification("Save The World", "5", "55", "PM", "12", "22", "05")
+//createNotification("Save The World", "5", "55", "PM", "12", "22", "05")
 
-var numReminders = 0
 
 function setDateTime() {
     const date = new Date()
     document.getElementById("date").innerHTML = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear()%2000
-    const time = (date.getHours < 12) ? "AM" : "PM"
+    const meridiem = (date.getHours() < 12) ? "AM" : "PM"
     const min = (date.getMinutes() < 10) ? "0" : ""
-    document.getElementById("time").innerHTML = date.getHours()%12 + ":" + min + date.getMinutes() + " " + time
+    let hour = (date.getHours())%12
+    if (hour == 0) {
+        hour = 12
+    }
+    document.getElementById("time").innerHTML = hour + ":" + min + date.getMinutes() + " " + meridiem
 }
 
 function setNotificationStatus(circleId, innerCircleId, titleId, timeId, remainingId) {
@@ -21,6 +26,7 @@ function setNotificationStatus(circleId, innerCircleId, titleId, timeId, remaini
     const remaining = document.getElementById(remainingId)
 
     const currentBorder = window.getComputedStyle(outerCircle).border
+    
 
     if (currentBorder === "1px solid rgb(255, 165, 0)") {
         outerCircle.style.border = "solid 1px rgba(60, 50, 50, 1)"
@@ -64,37 +70,37 @@ function addReminder() {
                 </div>*/
 
 function createNotification(event, hour, minute, meridiem, month, day, year) {
-    numReminders++;
-
     const containerElem = document.getElementById('remindersContainer')
 
     const notiContainerElem = createElement('div')
     addClassToElement(notiContainerElem, 'notification-container')
+    addIdToElement(notiContainerElem, 'noti-container-'+numReminders)
     const notiLeftElem = createElement('div')
     addClassToElement(notiLeftElem, 'reminder-left')
 
     const notiCircleElem = createElement('div')
     addClassToElement(notiCircleElem, 'reminder-circle')
-    addAttributeToElement(notiCircleElem, "onclick", "setNotificationStatus('circle'+numReminders, 'innerCircle'+numReminders, 'reminder-title'+numReminders, 'reminder-time'+numReminders, 'reminder-remaining'+numReminders)")
-    addIdToElement(notiCircleElem, 'circle' + numReminders) 
+    addIdToElement(notiCircleElem, 'reminder-circle-'+numReminders)
+    addAttributeToElement(notiCircleElem, "onclick", "setNotificationStatus('"+'circle-'+numReminders + "','"+'innerCircle-'+numReminders+"','"+'reminder-title-'+numReminders+"','"+'reminder-time-'+numReminders+"','"+'reminder-remaining-'+numReminders+"')")
+    addIdToElement(notiCircleElem, 'circle-'+numReminders) 
     const notiInnerCircleElem = createElement('div')
     addClassToElement(notiInnerCircleElem, 'inner-circle')
-    addIdToElement(notiInnerCircleElem, 'innerCircle' + numReminders)
+    addIdToElement(notiInnerCircleElem, 'innerCircle-' + numReminders)
 
     const notiTextElem = createElement('div')
     addClassToElement(notiTextElem, 'reminder-text')
     const notiTitleElem = createElement('h2')
     notiTitleElem.innerHTML = event
-    addIdToElement(notiTitleElem, 'reminder-title' + numReminders)
+    addIdToElement(notiTitleElem, 'reminder-title-'+numReminders)
     const notiTimeElem = createElement('h3')
     addClassToElement(notiTimeElem, 'reminder-time-black')
-    notiTimeElem.innerHTML = month + '/' + day + '/' + year + ', ' + hour + ':' + minute;
-    addIdToElement(notiTimeElem, 'reminder-time' + numReminders)
+    notiTimeElem.innerHTML = month + '/' + day + '/' + year + ', ' + hour + ':' + minute + meridiem;
+    addIdToElement(notiTimeElem, 'reminder-time-' + numReminders)
 
     const notiRightElem = createElement('div')
     addClassToElement(notiRightElem, 'reminder-right')
     const notiTimeRemainingElem = createElement('h2')
-    addIdToElement(notiTimeRemainingElem, 'reminder-remaining' + numReminders)
+    addIdToElement(notiTimeRemainingElem, 'reminder-remaining-' + numReminders)
 
     addChildElement(notiContainerElem, notiLeftElem)
     addChildElement(notiContainerElem, notiRightElem)
@@ -106,10 +112,12 @@ function createNotification(event, hour, minute, meridiem, month, day, year) {
 
     addChildElement(notiCircleElem, notiInnerCircleElem)
 
-    addChildElement(notiTextElem, notiTitleElem);
-    addChildElement(notiTextElem, notiTimeElem);
+    addChildElement(notiTextElem, notiTitleElem)
+    addChildElement(notiTextElem, notiTimeElem)
 
     addChildElement(containerElem, notiContainerElem)
+
+    numReminders++;
 }
 
 function createElement (elemType) {
@@ -130,4 +138,73 @@ function addChildElement(parentElem, childElem) {
 
 function addAttributeToElement(elem, attribute, ability ) {
     elem.setAttribute(attribute, ability)
-}   
+}
+
+function saveChanges() {
+    const newReminder = document.getElementById('new-reminder')
+    const displayStyle = window.getComputedStyle(newReminder).display;
+
+    if (displayStyle !== 'none') {
+        const inputEvent = document.getElementById('new-reminder-event')
+        const event = inputEvent.value
+        inputEvent.value = ''
+
+        const inputMonth = document.getElementById('new-reminder-month')
+        const month = inputMonth.value
+        inputMonth.value = ''
+
+        const inputDay = document.getElementById('new-reminder-day')
+        const day = inputDay.value
+        inputDay.value = ''
+
+        const inputYear = document.getElementById('new-reminder-year')
+        const year = inputYear.value
+        inputYear.value = ''
+
+        const inputHour = document.getElementById('new-reminder-hour')
+        const hour = inputHour.value
+        inputHour.value = ''
+
+        const inputMinute = document.getElementById('new-reminder-minute')
+        const minute = inputMinute.value
+        inputMinute.value = ''
+
+        const inputMeridiem = document.getElementById('meridiem-text')
+        meridiem = inputMeridiem.textContent
+        inputMeridiem.value = 'AM'
+
+        createNotification(event, hour, minute, meridiem, month, day, year)
+
+        newReminder.style.display = 'none'
+    }
+
+    for (let i = 0; i < numReminders; i++) {
+        const outerCircle = document.getElementById('circle-'+i)
+        const borderColor = window.getComputedStyle(outerCircle).border
+        if (borderColor === "1px solid rgb(255, 165, 0)") {
+            const noti = document.getElementById('noti-container-'+i)
+            noti.style.display = 'none'
+        }
+    }
+}
+
+                        /*<div class="reminder-text">
+                            <input id="new-reminder-event" class="event-input">
+                            <div class="new-time-date">
+                                <input id="new-reminder-month" class="input-field">
+                                <h3 id="new-reminder-date">/</h2>
+                                <input id="new-reminder-day" class="input-field">
+                                <h3 id="new-reminder-date">/</h2>
+                                <input id="new-reminder-year" class="input-field">
+
+                                <h3>, </h3>
+
+                                <input id="new-reminder-hour" class="input-field">
+                                <h3 id="new-reminder-time">:</h3>
+                                <input id="new-reminder-minute" class="input-field">
+
+                                <button onclick="switchMeridiem()" class="meridiem-btn">
+                                    <h3 id="meridiem-text">AM</h3>
+                                </button>
+                            </div>  
+                        </div>*/
