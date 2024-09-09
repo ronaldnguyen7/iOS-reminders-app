@@ -7,6 +7,37 @@
     max-width: 700px;
 }
 
+@media screen and (min-width: 0) {
+    :root {
+        --heading-padding: 25px 25px 10px 25px;
+        --reminder-padding: 0px 25px 0px 25px;
+        --footer-padding: 10px 25px 25px 25px;
+    }
+}
+@media screen and (min-width: 576px) {
+    :root {
+        --heading-padding: 25px 25px 10px 25px;
+        --reminder-padding: 0px 25px 0px 25px;
+        --footer-padding: 10px 25px 25px 25px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    :root {
+        --heading-padding: 35px 35px 15px 35px;
+        --reminder-padding: 0px 35px 0px 35px;
+        --footer-padding: 15px 35px 35px 35px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    :root {
+        --heading-padding: 50px 50px 20px 50px;
+        --reminder-padding: 0px 50px 0px 50px;
+        --footer-padding: 20px 50px 50px 50px;
+    }
+}
+
 body {
     height: 100vh;
 }
@@ -19,6 +50,8 @@ input {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border: white solid 2.5px;
+    background-color: black;
 }
 
 .heading-container {
@@ -26,8 +59,9 @@ input {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px 50px 20px 50px;
+    padding: var(--heading-padding);
     color: orange;
+    background-color: black;
 }
 
 .date-container {
@@ -42,7 +76,7 @@ input {
     flex-direction: column-reverse;
     width: 100%;
     height: auto;
-    padding: 0px 50px 0px 50px;
+    padding: var(--reminder-padding);
     margin-bottom: 10px;
     max-height: 70vh;
     overflow-y: auto;
@@ -108,10 +142,10 @@ input {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px;
+    padding: var(--footer-padding);
     color: orange;
     position: sticky;
-    width: 100vw;
+    width: 99vw;
 }
 
 .add-button-container {
