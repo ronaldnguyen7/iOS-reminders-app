@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    
+    font-family: sans-serif;
     background-color: black;
     max-width: 700px;
 }
@@ -94,8 +94,12 @@ input {
     align-items: center;
 }
 
-#reminder-time {
+.reminder-time-black {
     color: rgb(103, 103, 103);
+}
+
+.reminder-time-orange {
+    color: rgb(255, 165, 0);
 }
 
 .footing-container {
@@ -167,6 +171,7 @@ input {
     display: flex;
     height: auto;
     max-width: 500px;
+    margin-top: 5px;
 }
 
 .event-input {
@@ -219,7 +224,7 @@ input {
     background-color: orange;
     border: transparent;
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: 1px;
     border-radius: 5px;
     text-align: center;
 }

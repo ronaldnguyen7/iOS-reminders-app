@@ -1,7 +1,7 @@
 setInterval(setDateTime, 1000)
 setDateTime()
 
-createNotification("KILL ALL MEN","x", "x", "x", "x", "x")
+createNotification("Save The World", "5", "55", "PM", "12", "22", "05")
 
 var numReminders = 0
 
@@ -13,12 +13,12 @@ function setDateTime() {
     document.getElementById("time").innerHTML = date.getHours()%12 + ":" + min + date.getMinutes() + " " + time
 }
 
-function setNotificationStatus() {
-    const outerCircle = document.getElementById("circle")
-    const innerCircle = document.getElementById("innerCircle")
-    const title = document.getElementById("reminder-title")
-    const time = document.getElementById("reminder-time")
-    const remaining = document.getElementById("reminder-remaining")
+function setNotificationStatus(circleId, innerCircleId, titleId, timeId, remainingId) {
+    const outerCircle = document.getElementById(circleId)
+    const innerCircle = document.getElementById(innerCircleId)
+    const title = document.getElementById(titleId)
+    const time = document.getElementById(timeId)
+    const remaining = document.getElementById(remainingId)
 
     const currentBorder = window.getComputedStyle(outerCircle).border
 
@@ -63,7 +63,7 @@ function addReminder() {
                     </div>   
                 </div>*/
 
-function createNotification(event, hour, minute, month, day, year) {
+function createNotification(event, hour, minute, meridiem, month, day, year) {
     numReminders++;
 
     const containerElem = document.getElementById('remindersContainer')
@@ -75,7 +75,7 @@ function createNotification(event, hour, minute, month, day, year) {
 
     const notiCircleElem = createElement('div')
     addClassToElement(notiCircleElem, 'reminder-circle')
-    addAttributeToElement(notiCircleElem, "onclick", "setNotificationStatus()")
+    addAttributeToElement(notiCircleElem, "onclick", "setNotificationStatus('circle'+numReminders, 'innerCircle'+numReminders, 'reminder-title'+numReminders, 'reminder-time'+numReminders, 'reminder-remaining'+numReminders)")
     addIdToElement(notiCircleElem, 'circle' + numReminders) 
     const notiInnerCircleElem = createElement('div')
     addClassToElement(notiInnerCircleElem, 'inner-circle')
@@ -87,6 +87,7 @@ function createNotification(event, hour, minute, month, day, year) {
     notiTitleElem.innerHTML = event
     addIdToElement(notiTitleElem, 'reminder-title' + numReminders)
     const notiTimeElem = createElement('h3')
+    addClassToElement(notiTimeElem, 'reminder-time-black')
     notiTimeElem.innerHTML = month + '/' + day + '/' + year + ', ' + hour + ':' + minute;
     addIdToElement(notiTimeElem, 'reminder-time' + numReminders)
 
@@ -98,12 +99,15 @@ function createNotification(event, hour, minute, month, day, year) {
     addChildElement(notiContainerElem, notiLeftElem)
     addChildElement(notiContainerElem, notiRightElem)
 
-    addChildElement(notiLeftElem, notiTextElem)
     addChildElement(notiLeftElem, notiCircleElem)
-
+    addChildElement(notiLeftElem, notiTextElem)
+    
     addChildElement(notiRightElem, notiTimeRemainingElem)
 
     addChildElement(notiCircleElem, notiInnerCircleElem)
+
+    addChildElement(notiTextElem, notiTitleElem);
+    addChildElement(notiTextElem, notiTimeElem);
 
     addChildElement(containerElem, notiContainerElem)
 }
