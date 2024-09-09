@@ -147,33 +147,55 @@ function saveChanges() {
     if (displayStyle !== 'none') {
         const inputEvent = document.getElementById('new-reminder-event')
         const event = inputEvent.value
-        inputEvent.value = ''
 
         const inputMonth = document.getElementById('new-reminder-month')
         const month = inputMonth.value
-        inputMonth.value = ''
+        if (!isMonth(month)) {
+            errorSaving()
+            return;
+        }
 
         const inputDay = document.getElementById('new-reminder-day')
         const day = inputDay.value
-        inputDay.value = ''
+        if (!isDay(day)) {
+            errorSaving()
+            return;
+        }
 
         const inputYear = document.getElementById('new-reminder-year')
         const year = inputYear.value
-        inputYear.value = ''
+        if (!isYear(year)) {
+            errorSaving()
+            return;
+        }
+        
 
         const inputHour = document.getElementById('new-reminder-hour')
         const hour = inputHour.value
-        inputHour.value = ''
+        if (!isHour(hour)) {
+            errorSaving()
+            return;
+        }
 
         const inputMinute = document.getElementById('new-reminder-minute')
         const minute = inputMinute.value
-        inputMinute.value = ''
+        if (!isMinute(minute)) { 
+            errorSaving()
+            return;
+        }
 
         const inputMeridiem = document.getElementById('meridiem-text')
         meridiem = inputMeridiem.textContent
         inputMeridiem.value = 'AM'
 
         createNotification(event, hour, minute, meridiem, month, day, year)
+
+        inputEvent.value = ''
+        inputMonth.value = ''
+        inputDay.value = ''
+        inputYear.value = ''
+        inputHour.value = ''
+        inputMeridiem.value = 'AM'
 
         newReminder.style.display = 'none'
     }
@@ -208,3 +230,43 @@ function saveChanges() {
                                 </button>
                             </div>  
                         </div>*/
+function errorSaving() {
+    console.log('error saving')
+}
+
+function isDay(day) {
+    if (day > 0 && day <= 31) {
+        return true 
+    }
+
+    return false
+}
+function isMonth(month) {
+    if (month > 0 && month <= 12) {
+        return true
+    }
+
+    return false
+}
+function isYear(year) {
+    if (year > 0 && year < 100) {
+        return true
+    }
+
+    return false
+}
+function isHour(hour) {
+    if (hour > 0 && hour <= 12) {
+        return true
+    }
+
+    return false
+}
+
+function isMinute(minute) {
+    if (minute > 0 && minute < 60) {
+        return true
+    }
+
+    return false
+}
