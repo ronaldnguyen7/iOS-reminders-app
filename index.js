@@ -151,21 +151,21 @@ function saveChanges() {
         const inputMonth = document.getElementById('new-reminder-month')
         const month = inputMonth.value
         if (!isMonth(month)) {
-            errorSaving()
+            errorSaving(1)
             return;
         }
 
         const inputDay = document.getElementById('new-reminder-day')
         const day = inputDay.value
         if (!isDay(day)) {
-            errorSaving()
+            errorSaving(1)
             return;
         }
 
         const inputYear = document.getElementById('new-reminder-year')
         const year = inputYear.value
         if (!isYear(year)) {
-            errorSaving()
+            errorSaving(1)
             return;
         }
         
@@ -173,14 +173,14 @@ function saveChanges() {
         const inputHour = document.getElementById('new-reminder-hour')
         const hour = inputHour.value
         if (!isHour(hour)) {
-            errorSaving()
+            errorSaving(2)
             return;
         }
 
         const inputMinute = document.getElementById('new-reminder-minute')
         const minute = inputMinute.value
         if (!isMinute(minute)) { 
-            errorSaving()
+            errorSaving(2)
             return;
         }
 
@@ -230,8 +230,15 @@ function saveChanges() {
                                 </button>
                             </div>  
                         </div>*/
-function errorSaving() {
-    console.log('error saving')
+function errorSaving(error) {
+    const inputEvent = document.getElementById('new-reminder-event')
+    if (error === 1) {
+        inputEvent.value = 'DATE ERROR'
+    }
+    if (error === 2) {
+        inputEvent.value = 'TIME ERROR'
+    }
+    
 }
 
 function isDay(day) {

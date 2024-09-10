@@ -50,7 +50,7 @@ input {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: white solid 2.5px;
+    
     background-color: black;
 }
 
