@@ -271,7 +271,7 @@ function isHour(hour) {
 }
 
 function isMinute(minute) {
-    if (minute > 0 && minute < 60) {
+    if (minute >= 0 && minute < 60) {
         return true
     }
 
