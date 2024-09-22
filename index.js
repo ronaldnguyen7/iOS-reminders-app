@@ -1,7 +1,7 @@
 var numReminders = 0
 
-setInterval(setDateTime, 1000)
-setDateTime()
+setInterval(setDateTime(), 100)
+setInterval(checkReminderTime(), 100)
 
 //createNotification("Save The World", "5", "55", "PM", "12", "22", "05")
 
@@ -28,14 +28,14 @@ function setNotificationStatus(circleId, innerCircleId, titleId, timeId, remaini
     const currentBorder = window.getComputedStyle(outerCircle).border
     
 
-    if (currentBorder === "1px solid rgb(255, 165, 0)") {
-        outerCircle.style.border = "solid 1px rgba(60, 50, 50, 1)"
+    if (currentBorder === "1px solid rgb(0, 122, 255)") {
+        outerCircle.style.border = "1px solid rgba(60, 50, 50, 1)"
         innerCircle.style.backgroundColor = "transparent"
         title.style.color = "white"
         remaining.style.color = "white"
     } else {
-        outerCircle.style.border = "solid 1px orange"
-        innerCircle.style.backgroundColor = "orange"
+        outerCircle.style.border = "1px solid rgb(0, 122, 255)"
+        innerCircle.style.backgroundColor = "rgb(0, 122, 255)"
         title.style.color = "rgba(103,103,103)"
         remaining.style.color = "rgba(103,103,103)"
     }
@@ -50,6 +50,26 @@ function switchMeridiem() {
 function addReminder() {
     const form = document.getElementById("new-reminder")
     form.style.display = "flex"
+    const addBtn = document.getElementById("addBtn")
+    addBtn.style.display = "none"
+    const addText = document.getElementById("addText")
+    addText.style.display = "none"
+
+    const cancel = document.getElementById("cancelBtn")
+    cancelBtn.style.display = "block"
+}
+
+function cancelReminder() {
+    const form = document.getElementById("new-reminder")
+    form.style.display = "none"
+
+    const addBtn = document.getElementById("addBtn")
+    addBtn.style.display = "flex"
+    const addText = document.getElementById("addText")
+    addText.style.display = "block"
+
+    const cancel = document.getElementById("cancelBtn")
+    cancelBtn.style.display = "none"
 }
 
                 /*<div class="notification-container">
@@ -195,6 +215,7 @@ function saveChanges() {
         inputDay.value = ''
         inputYear.value = ''
         inputHour.value = ''
+        inputMinute.value = ''
         inputMeridiem.value = 'AM'
 
         newReminder.style.display = 'none'
@@ -203,7 +224,7 @@ function saveChanges() {
     for (let i = 0; i < numReminders; i++) {
         const outerCircle = document.getElementById('circle-'+i)
         const borderColor = window.getComputedStyle(outerCircle).border
-        if (borderColor === "1px solid rgb(255, 165, 0)") {
+        if (borderColor === "1px solid rgb(0, 122, 255)") {
             const noti = document.getElementById('noti-container-'+i)
             noti.style.display = 'none'
         }
@@ -276,4 +297,8 @@ function isMinute(minute) {
     }
 
     return false
+}
+
+function lateEvent(currentHour, currentMinute, currentMeridiem, reminderHour, reminderMinute, reminderMeridiem) {
+
 }

@@ -72,10 +72,16 @@
         <div class="bottom-align">
             <div class="footing-container">
                 <div class="add-button-container">
-                    <button onclick="addReminder()" class="add-btn">
-                        <h2 id="plus-sign">+</h2>
+                    <button id="cancelBtn" onclick="cancelReminder()" class="cancel-btn">
+                        <h2 id="save">Cancel</h2>
                     </button>
-                    <div onclick="addReminder()" class="text-hover">
+                    
+                    <button id="addBtn" onclick="addReminder()" class="add-btn">
+                        <div class="plus-sign-container">
+                            <h2 id="plus-sign">+</h2>
+                        </div>
+                    </button>
+                    <div id="addText" onclick="addReminder()" class="text-hover">
                         <h2 id="new-reminder-text">New Reminder</h2>
                     </div>  
                 </div>
